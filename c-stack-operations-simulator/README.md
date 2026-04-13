@@ -74,11 +74,67 @@ This app uses the following Firebase services:
 3. Your operations will be automatically saved to Firebase
 4. View operation history and analytics
 
+## Deployment
+
+### Option 1: Firebase Hosting (Recommended)
+
+Your project is configured for Firebase Hosting deployment.
+
+#### Automatic Deployment (GitHub Actions)
+1. **Set up GitHub Secrets** (in your repository settings):
+   - Go to Settings → Secrets and variables → Actions
+   - Add these secrets:
+     ```
+     FIREBASE_SERVICE_ACCOUNT: [Your Firebase service account JSON]
+     VITE_FIREBASE_API_KEY: [Your API key]
+     VITE_FIREBASE_AUTH_DOMAIN: [Your auth domain]
+     VITE_FIREBASE_PROJECT_ID: stacksimulator-d0ef3
+     VITE_FIREBASE_STORAGE_BUCKET: [Your storage bucket]
+     VITE_FIREBASE_MESSAGING_SENDER_ID: [Your messaging sender ID]
+     VITE_FIREBASE_APP_ID: [Your app ID]
+     VITE_FIREBASE_MEASUREMENT_ID: [Your measurement ID]
+     ```
+
+2. **Get Firebase Service Account**:
+   - Go to Firebase Console → Project Settings → Service accounts
+   - Generate a new private key
+   - Copy the entire JSON content as `FIREBASE_SERVICE_ACCOUNT`
+
+3. **Automatic Deployment**: Every push to `main` branch will automatically deploy to Firebase Hosting
+
+#### Manual Deployment
+```bash
+# Install Firebase CLI (if not already installed)
+npm install -g firebase-tools
+
+# Login to Firebase
+firebase login
+
+# Deploy
+npm run deploy
+# or
+firebase deploy --only hosting
+```
+
+### Option 2: Other Platforms
+
+#### Vercel (Easy Setup)
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy automatically on every push
+
+#### Netlify (Easy Setup)
+1. Connect your GitHub repository to Netlify
+2. Set build command: `npm run build`
+3. Set publish directory: `dist`
+4. Add environment variables in Netlify dashboard
+
 ## Available Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
+- `npm run deploy` - Build and deploy to Firebase Hosting
 
 ## Project Structure
 
